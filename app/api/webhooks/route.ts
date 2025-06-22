@@ -33,9 +33,14 @@ export async function POST(
         if (!sig || !webhookSecret) return;
         event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
         // console.log("✅ Stripe event type:", event.type);
-    } catch (error: any) {
-        console.log('Error message: ' + error.message);
-        return new NextResponse(`Webhook Error: ${error.message}`, { status: 404 });
+    } catch (error) {
+        if (error instanceof Error) {
+            console.log('Error message: ' + error.message);
+            return new NextResponse(`Webhook Error: ${error.message}`, { status: 404 });
+        } else {
+            console.log('Unknown error', error);
+            return new NextResponse(`Webhook Error: Unknown error`, { status: 500 });
+        }
     }
 
     if (relevantEvents.has(event.type)) {
