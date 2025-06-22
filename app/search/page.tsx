@@ -56,17 +56,15 @@ import SearchContent from "./components/SearchContent";
 
 export const revalidate = 0;
 
-interface Props {
-  searchParams?: {
-    title?: string | string[];
-  };
-}
-
-const Search = async ({ searchParams }: Props) => {
-  const title =
-    typeof searchParams?.title === "string" ? searchParams.title : "";
-
-  const songs = await getSongsByTitle(title);
+const Search = async ({
+    searchParams
+  }: {
+    searchParams?: Record<string, string | string[] | undefined>;
+  }) => {
+    const title =
+      typeof searchParams?.title === "string" ? searchParams.title : "";
+  
+    const songs = await getSongsByTitle(title);
 
   return (
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto">
