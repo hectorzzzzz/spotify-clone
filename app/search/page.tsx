@@ -3,13 +3,22 @@ import Header from "@/components/Header";
 import SearchInput from "@/components/SearchInput";
 import SearchContent from "./components/SearchContent";
 
-interface SearchProps {
-    searchParams: Record<string, string | string[] | undefined>;
-};
+// interface SearchProps {
+//     searchParams: {
+//         title: string;
+//     }
+// };
 export const revalidate = 0;
 
-const Search = async ({ searchParams }: SearchProps) => {
-    const title = typeof searchParams.title === "string" ? searchParams.title : "";
+// const Search = async ({ searchParams }: SearchProps) => {
+//     const songs = await getSongsByTitle(searchParams.title);
+const Search = async ({
+    searchParams,
+  }: {
+    searchParams: Record<string, string | string[] | undefined>;
+  }) => {
+    const title =
+      typeof searchParams.title === "string" ? searchParams.title : "";
     const songs = await getSongsByTitle(title);
 
     return (
