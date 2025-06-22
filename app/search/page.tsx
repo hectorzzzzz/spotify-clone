@@ -15,7 +15,9 @@ export const revalidate = 0;
 const Search = async ({
     searchParams,
   }: {
-    searchParams: Record<string, string | string[] | undefined>;
+    searchParams: {
+      title?: string | string[]; 
+    };
   }) => {
     const title =
       typeof searchParams.title === "string" ? searchParams.title : "";
