@@ -22,9 +22,8 @@ export async function POST(
             uuid: user?.id || '',
             email: user?.email || ''
         });
-        //@ts-expect-error
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ["card"],
+            // payment_method_types: ["card"],
             billing_address_collection: 'required',
             customer,
             line_items: [
@@ -36,11 +35,16 @@ export async function POST(
             mode: 'subscription',
             allow_promotion_codes: true,
             subscription_data: {
-                trial_from_plan: true,
-                metadata
+                metadata,
+                trial_settings: {
+                    end_behavior: {
+                      missing_payment_method: 'cancel', 
+                    },
+                  },
             },
             success_url: `${getURL()}/account`,
-            cancel_url: `${getURL()}`
+            cancel_url: `${getURL()}`,
+            payment_method_collection: 'always'
         });
 
         return NextResponse.json({ sessionId: session.id});
