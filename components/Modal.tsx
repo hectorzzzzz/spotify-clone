@@ -42,10 +42,10 @@ const Modal: React.FC<ModalProps> = ({
                         max-h-full
                         h-full
                         md:h-auto
-                        md:max-h-[85vh]
+                        md:max-h-[85vw]
                         w-full
                         md:w-[90vw]
-                        md:max-w-[450px]
+                        md:max-w-[600px]
                         translate-x-[-50%]
                         translate-y-[-50%]
                         rounded-md
@@ -60,6 +60,7 @@ const Modal: React.FC<ModalProps> = ({
                             text-center
                             font-bold
                             mb-4
+                            text-white
                         "
                     >
                         {title}
@@ -70,6 +71,7 @@ const Modal: React.FC<ModalProps> = ({
                             text-sm
                             leading-normal
                             text-center
+                            text-white
                         "
                     >
                         {description}

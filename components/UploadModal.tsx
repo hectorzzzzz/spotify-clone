@@ -133,7 +133,7 @@ const UploadModal = () => {
                     placeholder="Song author"
                 />
                 <div>
-                    <div className="pb-1">
+                    <div className="pb-1 text-white">
                         Select a song file
                     </div>
                     <Input
@@ -145,7 +145,7 @@ const UploadModal = () => {
                     />
                 </div>
                 <div>
-                    <div className="pb-1">
+                    <div className="pb-1 text-white">
                         Select an image
                     </div>
                     <Input

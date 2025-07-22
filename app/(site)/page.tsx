@@ -1,22 +1,31 @@
+
+
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
 import getSongs from "@/actions/getSongs";
 import PageContent from "./components/PageContent"
+import PlayListListItem from "@/components/PlaylistItem";
+import getPlaylist from "@/actions/getPlaylists";
+import NewPlaylist from "@/components/NewPlaylistItem";
 
 export const revalidate = 0;
 
 export default async function Home() {
   const songs = await getSongs();
+  const playlists = await getPlaylist();
 
   return (
-<div className="
-  bg-neutral-900 
-  rounded-lg 
-  h-full 
-  w-full 
-  overflow-hidden 
-  overflow-y-auto
-">
+<div 
+    className="
+    bg-neutral-900 
+    rounded-lg 
+    h-full 
+    w-full 
+    overflow-hidden 
+    overflow-y-auto
+  "
+  data-scrollable
+>
   <Header>
     <div className="mb=2">
       <h1
@@ -43,6 +52,19 @@ export default async function Home() {
           image="/images/liked.png"
           name="Liked Songs"
           href="liked"
+        />
+
+        {playlists?.map((playlist) => (
+          <NewPlaylist
+            key={playlist.id}
+            playlist={playlist}
+            href={`/playlist/${playlist.id}`}
+
+          />
+        ))} 
+
+        <PlayListListItem 
+          name="Create New Playlist"
         />
       </div>
     </div>

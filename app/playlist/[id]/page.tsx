@@ -1,12 +1,31 @@
-import getLikedSongs from "@/actions/getLikedSongs";
+import getPlaylistSongs from "@/actions/getPlaylistSongs";
 
 export const revalidate = 0;
 import Image from "next/image";
 import Header from "@/components/Header";
-import LikedContent from "./components/LikedContent";
+import PlaylistContent from "../components/playlistContent";
+import getPlaylistById from "@/actions/getPlaylistById";
 
-const Liked = async () => {
-    const songs = await getLikedSongs();
+interface PlaylistPageProps {
+    params: {
+        id: string;
+    }
+}
+
+const PlaylistPage = async ({ params }: PlaylistPageProps) => {
+    const playlist = await getPlaylistById(params.id)
+    
+    const songs = await getPlaylistSongs(params.id)
+
+    if (!playlist) {
+        return (
+          <div className="text-white p-6">
+            Playlist tidak ditemukan.
+          </div>
+        );
+    }
+
+    console.log("Playlist ID param:", params.id);
 
     return (
         <div
@@ -43,7 +62,7 @@ const Liked = async () => {
                                 fill
                                 alt="Playlist"
                                 className="object-cover"
-                                src="/images/liked.png"
+                                src= {playlist.image_url ?? "/images/placeholder.png"}
                             />
                         </div>
                         <div className="
@@ -63,15 +82,23 @@ const Liked = async () => {
                                 lg:text-7xl
                                 font-bold
                             ">
-                                Liked Songs
+                                {playlist.name}
                             </h1>
+                            {playlist.desc && (
+                                <p className="text-neutral-400 text-sm whitespace-pre-wrap">
+                                    {playlist.desc}
+                                </p>
+                            )}
                         </div>
                     </div>
                 </div>
             </Header>
-            <LikedContent songs={songs} />
+            <PlaylistContent songs={songs} playlistId={playlist.id} />
         </div>
     );
+    
 }
 
-export default Liked;
+
+
+export default PlaylistPage;
