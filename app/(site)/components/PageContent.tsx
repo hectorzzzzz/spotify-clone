@@ -40,7 +40,7 @@ const PageContent: React.FC<PageContentProps> = ({
         }
 
         getPlaylist();
-    }, []);
+    }, [supabase]);
 
     const handleAddToPlaylist = async (playlistId: string, songId: string) => {
         

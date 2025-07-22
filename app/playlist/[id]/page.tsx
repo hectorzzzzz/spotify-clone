@@ -1,16 +1,19 @@
+import React from "react";
 import getPlaylistSongs from "@/actions/getPlaylistSongs";
-
 export const revalidate = 0;
 import Image from "next/image";
 import Header from "@/components/Header";
 import PlaylistContent from "../components/playlistContent";
 import getPlaylistById from "@/actions/getPlaylistById";
 
-
-const PlaylistPage = async ({ params }: { params: { id: string } }) => {
-    const playlist = await getPlaylistById(params.id)
-
-    const songs = await getPlaylistSongs(params.id)
+export default async function PlaylistPage({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
+    const { id } = await params;
+    const playlist = await getPlaylistById(id);
+    const songs = await getPlaylistSongs(id);
 
     if (!playlist) {
         return (
@@ -19,8 +22,6 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
           </div>
         );
     }
-
-    console.log("Playlist ID param:", params.id);
 
     return (
         <div
@@ -93,7 +94,3 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
     );
     
 }
-
-
-
-export default PlaylistPage;

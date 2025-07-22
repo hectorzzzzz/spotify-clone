@@ -11,6 +11,7 @@ import { useUser } from "@/hooks/useUser";
 import uniqid from "uniqid";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { FaFileUpload } from "react-icons/fa";
+import Image from "next/image";
 
 const PlaylistModal = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -136,7 +137,7 @@ const PlaylistModal = () => {
                     htmlFor="image"
                 >
                     {previewUrl ? (
-                        <img 
+                        <Image
                             src={previewUrl}
                             alt="Preview"
                             className="object-cover w-full h-full absolute inset-0"
