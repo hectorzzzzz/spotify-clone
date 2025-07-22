@@ -19,7 +19,7 @@ const PlaylistModal = () => {
     const playlistModal = useCreatePlaylistModal();
     const { user } = useUser();
     const supabaseClient = useSupabaseClient();
-    const { register, handleSubmit, reset, setValue} = useForm<FieldValues>({
+    const { register, handleSubmit, reset } = useForm<FieldValues>({
         defaultValues: {
             name: '',
             desc: '',

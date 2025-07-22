@@ -9,7 +9,6 @@ import ToasterProvider from "@/providers/ToasterProvider";
 import getSongsByUserId from "@/actions/getSongsByUserId";
 import Player from "@/components/Player";
 import getActiveProductsWithPrices from "@/actions/getActiveProductsWithPrices";
-import DropDownModal from "@/components/DropdownModal";
 
 const font = Figtree({
   subsets: ["latin"],
