@@ -6,9 +6,14 @@ import Header from "@/components/Header";
 import PlaylistContent from "../components/playlistContent";
 import getPlaylistById from "@/actions/getPlaylistById";
 
-const PlaylistPage = async ({ params }: { params: { id: string }}) => {
+interface PlaylistPageProps {
+    params: {
+        id: string;
+    };
+}
+
+const PlaylistPage = async ({ params }: PlaylistPageProps) => {
     const playlist = await getPlaylistById(params.id)
-    
     const songs = await getPlaylistSongs(params.id)
 
     if (!playlist) {
